@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!--
+    refer to: [http://builtbywill.com/code/booklet/,
+    http://tympanus.net/codrops/2010/12/14/moleskine-notebook/]
+-->
+<head>
+    <title>Image book with jQuery Booklet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content="Image book with jQuery Booklet"/>
+    <meta name="keywords" content="jquery, image book, flip, pages, booklet, plugin, css3"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="booklet/jquery.booklet.1.1.0.css" media="screen"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+
+    <script type="text/javascript" src="booklet/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="booklet/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="booklet/jquery.booklet.1.1.0.min.js"></script>
+
+</head>
+
+<body>
+    <h1 class="title">Image book with jQuery Booklet</h1>
+    <div class="book_wrapper">
+        <a id="next_page_button"></a>
+        <a id="prev_page_button"></a>
+        <div id="loading" class="loading">Loading pages...</div>
+        <div id="mybook" style="display:none;">
+        </div>
+    </div>
+    <!-- The JavaScript -->
+    <script type="text/javascript" src="js/dist/imagebox.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
