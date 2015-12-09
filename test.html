@@ -13,9 +13,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="booklet/jquery.booklet.latest.css" media="screen"/>
 
-    <script src="bower_components/react/react.js"></script>
-    <script src="bower_components/react/react-dom.js"></script>
-
     <script type="text/javascript" src="booklet/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="booklet/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="booklet/jquery.booklet.latest.js"></script>
@@ -23,10 +20,20 @@
 
 <body>
     <h1 class="title">Image book with jQuery Booklet</h1>
-    <div id="loading" className="loading">Loading pages...</div>
-    <div id="booker"></div>
+    <div class="book_wrapper">
+        <a id="next_page_button"></a>
+        <a id="prev_page_button"></a>
+        <div id="loading" class="loading">Loading pages...</div>
+        <div class="no_image">No Image selected!</div>
+        <div id="mybook" style="display:none;">
+        </div>
+    </div>
+    <footer id="footer">
+        <input id="fileDialog" type="file" multiple accept="image/*" style="display:none;"/>
+        <label for="fileDialog">Select Images</label>
+    </footer>
     <!-- The JavaScript -->
-    <script type="text/javascript" src="js/dist/booker.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>

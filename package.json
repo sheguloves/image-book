@@ -20,7 +20,8 @@
     "url": "https://github.com/sheguloves/image-book/issues"
   },
   "scripts": {
-    "build": "babel js/src/imagebox.js"
+    "postinstall": "bower install",
+    "build": "babel js/src/ -watch --out-dir js/dist/"
   },
   "window": {
     "title": "Title",
