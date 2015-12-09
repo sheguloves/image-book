@@ -58,7 +58,7 @@ $(function() {
             name: null, // name of the booklet to display in the document title bar
             width: 800, // container width
             height: 500, // container height
-            speed: 600, // speed of the transition between pages
+            speed: 300, // speed of the transition between pages
             direction: 'LTR', // direction of the overall content organization, default LTR, left to right, can be RTL for languages which read right to left
             startingPage: 0, // index of the first page to be displayed
             easing: 'easeInOutQuad', // easing method for complete transition
