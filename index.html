@@ -10,23 +10,29 @@
     <meta name="description" content="Image book with jQuery Booklet"/>
     <meta name="keywords" content="jquery, image book, flip, pages, booklet, plugin, css3"/>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="booklet/jquery.booklet.latest.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="app/styles/css/jquery.booklet.latest.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="app/styles/css/style.css" media="screen"/>
 
+    <!-- build:libs -->
     <script src="bower_components/react/react.js"></script>
     <script src="bower_components/react/react-dom.js"></script>
+    <!-- endbuild -->
 
-    <script type="text/javascript" src="booklet/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="booklet/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="booklet/jquery.booklet.latest.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery.booklet.latest.js"></script>
+    
 </head>
 
 <body>
-    <h1 class="title">Image book with jQuery Booklet</h1>
-    <div id="loading" className="loading">Loading pages...</div>
+    <header>
+        <h1>Image book with jQuery Booklet</h1>
+    </header>
     <div id="booker"></div>
     <!-- The JavaScript -->
-    <script type="text/javascript" src="js/dist/booker.js"></script>
+    <!-- build:js -->
+    <script type="text/javascript" src="app/js/dist/booker.js"></script>
+    <!-- endbuild -->
 </body>
 
 </html>

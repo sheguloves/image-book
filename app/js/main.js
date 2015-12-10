@@ -1,6 +1,6 @@
 $(function() {
-    var urls = ["images/001.jpg", "images/002.jpg", "images/003.jpg", "images/004.jpg",
-                "images/005.jpg", "images/006.jpg", "images/007.jpg", "images/008.jpg"];
+    var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
+            "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
     var $mybook = $('#mybook');
     var $bttn_next = $('#next_page_button');
     var $bttn_prev = $('#prev_page_button');

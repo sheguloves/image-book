@@ -10,16 +10,18 @@
     <meta name="description" content="Image book with jQuery Booklet"/>
     <meta name="keywords" content="jquery, image book, flip, pages, booklet, plugin, css3"/>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="booklet/jquery.booklet.latest.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="app/styles/css/jquery.booklet.latest.css"/>
+    <link rel="stylesheet" type="text/css" href="app/styles/css/style.css"/>
 
-    <script type="text/javascript" src="booklet/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="booklet/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="booklet/jquery.booklet.latest.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="app/libs/booklet/jquery.booklet.latest.js"></script>
 </head>
 
 <body>
-    <h1 class="title">Image book with jQuery Booklet</h1>
+    <header>
+        <h1>Image book with jQuery Booklet</h1>
+    </header>
     <div class="book_wrapper">
         <a id="next_page_button"></a>
         <a id="prev_page_button"></a>
@@ -33,7 +35,7 @@
         <label for="fileDialog" class="open-button">Select Images</label>
     </footer>
     <!-- The JavaScript -->
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="app/js/main.js"></script>
 </body>
 
 </html>

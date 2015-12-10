@@ -1,6 +1,8 @@
 node_modules
-js/dist/
+app/js/dist/
 bower_components
 .bowerrc
-
+build
+target
+cache
 

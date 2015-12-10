@@ -1,5 +1,5 @@
-var urls = ["images/001.jpg", "images/002.jpg", "images/003.jpg", "images/004.jpg",
-            "images/005.jpg", "images/006.jpg", "images/007.jpg", "images/008.jpg"];
+var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
+            "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
 
 var Book = React.createClass({
     removeBooklet: function() {
@@ -20,7 +20,7 @@ var Book = React.createClass({
             speed: 300, // speed of the transition between pages
             startingPage: 0, // index of the first page to be displayed
 
-            closed: true,   // start with the book "closed", will add empty pages to beginning and end of book
+            closed: false,   // start with the book "closed", will add empty pages to beginning and end of book
 
             pagePadding: 10, // padding for each page wrapper
             pageNumbers: true, // display page numbers on each page
@@ -67,6 +67,7 @@ var Book = React.createClass({
             <div className="book_wrapper">
                 <a id="next_page_button"></a>
                 <a id="prev_page_button"></a>
+                <div id="loading" className="loading">Loading pages...</div>
                 <div id="mybook" style={{display: 'none'}}>
                     {temp}
                 </div>

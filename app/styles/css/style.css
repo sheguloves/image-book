@@ -11,12 +11,6 @@ body {
     background-size: 100%;
 }
 
-h1 {
-    color: #2F1B0C;
-    font-size: 40px;
-    margin: 20px 0px 0px 20px;
-}
-
 span.reference {
     font-family: Arial;
     display: block;
@@ -36,9 +30,16 @@ span.reference a:hover {
     color: #ddd;
 }
 
-footer {
+footer, header {
     margin: auto;
     width: 800px;
+}
+
+header h1 {
+    margin-top: 20px;
+    text-align: center;
+    color: #2F1B0C;
+    font-size: 40px;
 }
 
 

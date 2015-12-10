@@ -21,12 +21,15 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "build": "babel js/src/ -watch --out-dir js/dist/"
+    "dev": "babel app/js/src/ --watch --out-dir app/js/dist/",
+    "prestart": "babel app/js/src/ --out-dir app/js/dist/",
+    "start": "gulp",
+    "gulp": "gulp"
   },
   "window": {
     "title": "Title",
     "position": "center",
-    "toolbar": true,
+    "toolbar": false,
     "resizable": true,
     "width": 1000,
     "height": 800,
@@ -43,7 +46,12 @@
     ]
   },
   "devDependencies": {
+    "bower": "^1.6.5",
     "babel-cli": "^6.2.0",
-    "babel-preset-react": "^6.1.18"
+    "babel-preset-react": "^6.1.18",
+    "gulp": "^3.9.0",
+    "gulp-html-replace": "^1.5.4",
+    "gulp-clean": "^0.3.1",
+    "nw-builder": "^2.1.0"
   }
 }
