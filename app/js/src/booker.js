@@ -108,7 +108,7 @@ var Files = React.createClass({
         return (
             <footer>
                 <input id="fileDialog" type="file" multiple onChange={this.handleFiles} accept="image/*" style={{display:'none'}}/>
-                <label style={{cursor: 'pointer'}} htmlFor="fileDialog" className="open-button">Select Files</label>
+                <label style={{cursor: 'pointer'}} htmlFor="fileDialog" className="open-button">Select Images</label>
             </footer>
         )
     }

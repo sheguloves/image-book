@@ -12,10 +12,11 @@ var bases = {
 };
 
 var paths = {
-    booklet: ['app/libs/booklet/**'],
+    booklet: ['app/libs/booklet/*.js'],
     libs: ['bower_components/react/react.js',
         'bower_components/react/react-dom.js'
     ],
+    bookletimages: ['app/libs/booklet/images/**'],
     basefiles: ['package.json'],
     indexhtml: ['index.html'],
     testhtml: ['test.html'],
@@ -45,6 +46,11 @@ gulp.task('copy-libs', ['clean'], function() {
         .pipe(gulp.dest(bases.app + "libs"));
 });
 
+gulp.task('copy-images', ['clean'], function() {
+    return gulp.src(paths.bookletimages)
+        .pipe(gulp.dest(bases.app + "styles/css/images"));
+});
+
 gulp.task('copy-reactjs', ['clean'], function() {
     return gulp.src(paths.reactjs)
         .pipe(gulp.dest(bases.app + "js"));
@@ -63,8 +69,8 @@ gulp.task('copy-styles', ['clean'], function() {
 
 // replace css/libs/js with min files
 gulp.task('build-reactjs', ['clean', 'copy-booklet', 'copy-libs', 'copy-reactjs',
-    'copy-styles', 'copy-files'],  function() {
-    gulp.src(paths.indexhtml)
+    'copy-styles', 'copy-files', 'copy-images'],  function() {
+    return gulp.src(paths.indexhtml)
         .pipe(htmlreplace({
             'libs': ['app/libs/react/react.js', 'app/libs/react/react-dom.js'],
             'js': 'app/js/booker.js'
@@ -73,8 +79,8 @@ gulp.task('build-reactjs', ['clean', 'copy-booklet', 'copy-libs', 'copy-reactjs'
 });
 
 gulp.task('build-rawjs', ['clean', 'copy-booklet', 'copy-rawjs',
-    'copy-styles', 'copy-files'],  function() {
-    gulp.src(paths.testhtml)
+    'copy-styles', 'copy-files', 'copy-images'],  function() {
+    return gulp.src(paths.indexhtml)
         .pipe(gulp.dest(bases.dist));
 });
 
@@ -99,5 +105,5 @@ gulp.task('build-app', ['clean', 'build-reactjs'], function() {
 });
 
 //build full app
-gulp.task('default', ['clean', 'build-reactjs', 'build-app'],  function() {
+gulp.task('default', ['clean', 'build-app'],  function() {
 });
