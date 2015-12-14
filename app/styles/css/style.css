@@ -30,7 +30,8 @@ span.reference a:hover {
     color: #ddd;
 }
 
-footer, header {
+footer,
+header {
     margin: auto;
     width: 800px;
 }
@@ -40,6 +41,11 @@ header h1 {
     text-align: center;
     color: #2F1B0C;
     font-size: 40px;
+}
+
+canvas {
+    width: 300px;
+    height: 300px;
 }
 
 
@@ -190,4 +196,32 @@ a#prev_page_button:hover {
     border-width: 1px;
     padding: 6px 12px;
     border-radius: 4px;
+}
+
+.gallery {
+    padding-top: 20px;
+    height: 200px;
+    width: 905px;
+    margin: auto;
+}
+
+.gallery ul {
+    height: 100%;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.gallery li {
+    width: 150px;
+    padding-left: 5px;
+    padding-right: 5px;
+    max-height: 100%;
+    display: inline-block;
+}
+
+.gallery img {
+    max-width: 150px;
+    max-height: 200px;
 }

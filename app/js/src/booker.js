@@ -1,5 +1,39 @@
 var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
             "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
+var Gallery = React.createClass({
+    render: function() {
+        var temp;
+        var images = this.props.images;
+        if (images && images.length > 0) {
+            temp = [];
+            images.forEach(function(item) {
+                temp.push(<GalleryItem key={item} imagesrc={item} />);
+            });
+        } else {
+            temp = <div> No image selected </div>
+        }
+        return (
+            <div className="gallery">
+                <ul>
+                    {temp}
+                </ul>
+            </div>
+        )
+    }
+});
+
+var GalleryItem = React.createClass({
+    loadHandler: function() {
+        window.URL.revokeObjectURL(this.src);
+    },
+    render: function() {
+        return (
+            <li><div>
+                <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
+            </div></li>
+        )
+    }
+});
 
 var Book = React.createClass({
     removeBooklet: function() {
@@ -54,7 +88,7 @@ var Book = React.createClass({
     },
     render: function() {
         var temp;
-        var images = this.props.images
+        var images = this.props.images;
         if (images && images.length > 0) {
             temp = [];
             images.forEach(function(item) {
@@ -72,9 +106,10 @@ var Book = React.createClass({
                     {temp}
                 </div>
             </div>
-        );
+        )
     }
 });
+
 
 var ImageItem = React.createClass({
     loadHandler: function() {
@@ -85,7 +120,7 @@ var ImageItem = React.createClass({
             <div className="image_box">
                 <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
             </div>
-        );
+        )
     }
 });
 
@@ -101,7 +136,7 @@ var Files = React.createClass({
                 src = window.URL.createObjectURL(files[i]);
                 imagelist.push(src);
             }
-            this.props.onImageLoaded(imagelist);
+            this.props.onImageSelected(imagelist);
         }
     },
     render: function() {
@@ -120,14 +155,15 @@ var Booker = React.createClass({
             images: urls
         };
     },
-    handleImageLoaded: function(imageslist) {
+    handleImageSelected: function(imageslist) {
         this.setState({images: imageslist});
     },
     render: function() {
         return (
             <div>
                 <Book images={this.state.images} />
-                <Files onImageLoaded={this.handleImageLoaded} />
+                <Files onImageSelected={this.handleImageSelected} />
+                <Gallery images={this.state.images} />
             </div>
         );
     }

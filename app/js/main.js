@@ -6,6 +6,7 @@ $(function() {
     var $bttn_prev = $('#prev_page_button');
     var $loading = $('#loading');
     var $no_image = $('.no_image');
+    var $gallery = $('.gallery');
 
     var useObjectUrl = false;
     var imagelist = [];
@@ -13,13 +14,24 @@ $(function() {
     var length = 0;
     var loaded = 0;
 
-    var loadHandler = function() {
+    function loadHandler(event) {
         loaded++;
         if (loaded === length) {
             addBooklet();
+            buildGallery($('img'));
             loaded = 0;
         }
     };
+
+    function buildGallery(pages) {
+        var page;
+        var $pages = $('<ul>');
+        for (var i = 0; i < pages.length; i ++) {
+            page = $(pages[i]).clone();
+            $('<li>').append($('<div>').append(page)).appendTo($pages);
+        }
+        $pages.appendTo($gallery);
+    }
 
     function revokeUrls(urls) {
         if (useObjectUrl) {
@@ -30,7 +42,7 @@ $(function() {
         }
     }
 
-    var renderImages = function(imagelist) {
+    function renderImages(imagelist) {
         if (imagelist.length > 0) {
             length = imagelist.length;
             $no_image.hide();
@@ -50,7 +62,7 @@ $(function() {
         }
     }
 
-    var addBooklet = function() {
+    function addBooklet() {
         $loading.hide();
         $bttn_next.show();
         $bttn_prev.show();
@@ -73,11 +85,15 @@ $(function() {
         });
     }
 
-    var removeBooklet = function() {
+    function removeBooklet() {
         $bttn_next.hide();
         $bttn_prev.hide();
         $mybook.hide().booklet("destroy");
         $mybook.empty();
+    }
+
+    function removeGallery() {
+        $gallery.empty();
     }
 
     var $fileDialog = $('#fileDialog');
@@ -85,6 +101,7 @@ $(function() {
         $loading.show();
         revokeUrls(imagelist);
         removeBooklet();
+        removeGallery();
         var files = event.target.files;
         imagelist = [];
         if (files.length > 0) {
