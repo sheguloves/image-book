@@ -53,12 +53,15 @@ $(function() {
         var page;
         var $pages = $('<ul>');
         for (var i = 0; i < pages.length; i ++) {
+            var className = (i % 2) === 0 ? "left-page" : "right-page";
             page = $(pages[i]).clone();
             $('<li>').append(
                 $('<div>')
                 .addClass('galleryItem')
+                .addClass(className)
                 .data('index', i)
                 .append(page)
+                .append($('<div>').addClass('g-counter').text(i + 1))
                 .click(function(event) {
                     $mybook.booklet("gotopage", $(event.currentTarget).data('index'));
                 })

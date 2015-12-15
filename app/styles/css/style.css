@@ -184,17 +184,16 @@ a#prev_page_button:hover {
  }
 
 .gallery {
-    padding: 4rem 1rem 1rem 1rem;
-    height: 20rem;
+    padding: 4rem 1rem 4rem 1rem;
+    height: 13rem;
     width: 90rem;
     margin: auto;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-top: 4rem;
 }
 
 .gallery ul {
-    height: 100%;
+    height: 12.5rem;
     width: 100%;
     display: block;
     white-space: nowrap; /* use this attribute to make children keep in one line */
@@ -202,23 +201,52 @@ a#prev_page_button:hover {
 
 .gallery li{
     width: 10rem;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 100%;
     display: inline-block;
     vertical-align: top;
 }
 
 .gallery img {
-    width: 100%;
+    border: 1px solid #ddd;
+    padding: 1px;
+    width: 98%;
     max-height: 100%;
 }
 
 .galleryItem {
+    position: relative;
     padding: 0.25rem;
     width: 100%;
     height: 100%;
     transition: all 0.5s ease;
+}
+
+.left-page {
+    background: #fff url(../images/left_bg.jpg) no-repeat top left;
+}
+
+.right-page {
+    background: #efefef url(../images/right_bg.jpg) no-repeat top left;
+}
+
+.g-counter {
+    bottom: 0.25rem;
+    position: absolute;
+    display: block;
+    width: 90%;
+    height: 0.5rem;
+    border-top: 1px solid #ddd;
+    color: #222;
+    text-align: center;
+    font-size: 0.5rem;
+    padding: 1.25px 0 0;
+    background: transparent;
+    -moz-box-shadow: 0px -1px 1px #fff;
+    -webkit-box-shadow: 0px -1px 1px #fff;
+    box-shadow: 0px -1px 1px #fff;
+    opacity: 0.8;
 }
 
 .galleryItem:hover {

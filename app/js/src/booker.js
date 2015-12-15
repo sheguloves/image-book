@@ -79,9 +79,12 @@ var GalleryItem = React.createClass({
         $mybook.booklet("gotopage", this.props.pageindex);
     },
     render: function() {
+        var clazz = (this.props.pageindex % 2) === 0 ? "left-page" : "right-page";
+        clazz = clazz + " galleryItem";
         return (
-            <li><div className="galleryItem" onClick={this.clickHandler}>
+            <li><div className={clazz} onClick={this.clickHandler}>
                 <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
+                <div className="g-counter">{this.props.pageindex + 1}</div>
             </div></li>
         )
     }
