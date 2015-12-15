@@ -3,51 +3,30 @@
     padding: 0;
 }
 
+html {
+    font-size: 10px;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #444;
-    font-size: 12px;
+    font-size: 1.2rem;
     color: #000;
     background-size: 100%;
-}
-
-span.reference {
-    font-family: Arial;
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-span.reference a {
-    color: #000;
-    text-transform: uppercase;
-    text-decoration: none;
-    margin: 0px 20px;
-}
-
-span.reference a:hover {
-    color: #ddd;
 }
 
 footer,
 header {
     margin: auto;
-    width: 800px;
+    width: 80rem;
 }
 
 header h1 {
-    margin-top: 20px;
+    margin-top: 2rem;
     text-align: center;
     color: #2F1B0C;
-    font-size: 40px;
+    font-size: 4rem;
 }
-
-canvas {
-    width: 300px;
-    height: 300px;
-}
-
 
 /* Booklet jQuery Plugin Style*/
 
@@ -55,41 +34,41 @@ canvas {
     -moz-box-shadow: 0px 0px 1px #fff;
     -webkit-box-shadow: 0px 0px 1px #fff;
     box-shadow: 0px 0px 1px #fff;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
 }
 
 .booklet .b-wrap-left {
     background: #fff url(../images/left_bg.jpg) no-repeat top left;
-    -webkit-border-top-left-radius: 10px;
-    -webkit-border-bottom-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 1rem;
+    -webkit-border-bottom-left-radius: 1rem;
+    -moz-border-radius-topleft: 1rem;
+    -moz-border-radius-bottomleft: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 
 .booklet .b-wrap-right {
     background: #efefef url(../images/right_bg.jpg) no-repeat top left;
-    -webkit-border-top-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-topright: 10px;
-    -moz-border-radius-bottomright: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 1rem;
+    -webkit-border-bottom-right-radius: 1rem;
+    -moz-border-radius-topright: 1rem;
+    -moz-border-radius-bottomright: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 
 .booklet .b-counter {
-    bottom: 10px;
+    bottom: 1rem;
     position: absolute;
     display: block;
     width: 90%;
-    height: 20px;
+    height: 2rem;
     border-top: 1px solid #ddd;
     color: #222;
     text-align: center;
-    font-size: 12px;
+    font-size: 1.2rem;
     padding: 5px 0 0;
     background: transparent;
     -moz-box-shadow: 0px -1px 1px #fff;
@@ -101,8 +80,8 @@ canvas {
 .book_wrapper {
     margin: 0 auto;
     padding-top: 50px;
-    width: 905px;
-    height: 540px;
+    width: 90.5rem;
+    height: 54rem;
     position: relative;
     background: transparent url(../images/bg.png) no-repeat 9px 27px;
 }
@@ -189,19 +168,25 @@ a#prev_page_button:hover {
 }
 
 .open-button {
-    border-color: #ccc;
+    background-color: #fff;
     cursor: pointer;
-    margin: 0 5px;
-    border-style: solid;
-    border-width: 1px;
-    padding: 6px 12px;
+    margin: 0 0.5rem;
+    border: 1px solid #ccc;
+    padding: 0.6rem 1.2rem;
     border-radius: 4px;
+    line-height: 2.8rem;
 }
 
+.open-button:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+ }
+
 .gallery {
-    padding-top: 20px;
-    height: 200px;
-    width: 905px;
+    padding: 4rem 1rem 1rem 1rem;
+    height: 20rem;
+    width: 90rem;
     margin: auto;
 }
 
@@ -209,19 +194,33 @@ a#prev_page_button:hover {
     height: 100%;
     width: 100%;
     display: block;
-    white-space: nowrap;
-    overflow: auto;
+    white-space: nowrap; /* use this attribute to make children keep in one line */
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 4rem;
 }
 
-.gallery li {
-    width: 150px;
-    padding-left: 5px;
-    padding-right: 5px;
-    max-height: 100%;
+.gallery li{
+    width: 10rem;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 100%;
     display: inline-block;
+    vertical-align: top;
 }
 
 .gallery img {
-    max-width: 150px;
-    max-height: 200px;
+    width: 100%;
+    max-height: 100%;
+}
+
+.galleryItem {
+    padding: 0.25rem;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease;
+}
+
+.galleryItem:hover {
+    transform: scale(1.3, 1.3);
 }

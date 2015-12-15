@@ -46,7 +46,7 @@
     "toolbar": false,
     "resizable": true,
     "width": 1000,
-    "height": 800,
+    "height": 1000,
     "min_width": 800,
     "min_height": 600,
     "always-on-top": false,

@@ -7,6 +7,7 @@ $(function() {
     var $loading = $('#loading');
     var $no_image = $('.no_image');
     var $gallery = $('.gallery');
+    var $test = $('.test');
 
     var useObjectUrl = false;
     var imagelist = [];
@@ -18,7 +19,8 @@ $(function() {
         loaded++;
         if (loaded === length) {
             addBooklet();
-            buildGallery($('img'));
+            var temp = $('img');
+            buildGallery(temp);
             loaded = 0;
         }
     };
@@ -28,7 +30,15 @@ $(function() {
         var $pages = $('<ul>');
         for (var i = 0; i < pages.length; i ++) {
             page = $(pages[i]).clone();
-            $('<li>').append($('<div>').append(page)).appendTo($pages);
+            $('<li>').append(
+                $('<div>')
+                .addClass('galleryItem')
+                .data('index', i)
+                .append(page)
+                .click(function(event) {
+                    $mybook.booklet("gotopage", $(event.currentTarget).data('index'));
+                })
+            ).appendTo($pages);
         }
         $pages.appendTo($gallery);
     }

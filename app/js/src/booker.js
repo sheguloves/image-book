@@ -6,9 +6,9 @@ var Gallery = React.createClass({
         var images = this.props.images;
         if (images && images.length > 0) {
             temp = [];
-            images.forEach(function(item) {
-                temp.push(<GalleryItem key={item} imagesrc={item} />);
-            });
+            for (var i = 0; i < images.length; i ++) {
+                temp.push(<GalleryItem key={images[i] + i} pageindex={i} imagesrc={images[i]} />);
+            }
         } else {
             temp = <div> No image selected </div>
         }
@@ -26,9 +26,14 @@ var GalleryItem = React.createClass({
     loadHandler: function() {
         window.URL.revokeObjectURL(this.src);
     },
+    clickHandler: function() {
+        //TODO: Replaced this function with Flux
+        var $mybook = $('#mybook');
+        $mybook.booklet("gotopage", this.props.pageindex);
+    },
     render: function() {
         return (
-            <li><div>
+            <li><div className="galleryItem" onClick={this.clickHandler}>
                 <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
             </div></li>
         )
@@ -37,14 +42,14 @@ var GalleryItem = React.createClass({
 
 var Book = React.createClass({
     removeBooklet: function() {
-        var $mybook = $('#mybook');
+        var $mybook = $(this.refs.mybook);
         $mybook.booklet("destroy");
     },
     addBooklet: function() {
-        var $loading = $('#loading');
-        var $bttn_next = $('#next_page_button');
-        var $bttn_prev = $('#prev_page_button');
-        var $mybook = $('#mybook');
+        var $loading = $(this.refs.loading);
+        var $bttn_next = $(this.refs.next_page_button);
+        var $bttn_prev = $(this.refs.prev_page_button);
+        var $mybook = $(this.refs.mybook);
         $loading.hide();
         $bttn_next.show();
         $bttn_prev.show();
@@ -69,10 +74,10 @@ var Book = React.createClass({
     componentWillUnmount: function() {
         // remove previous booklet before new images loading
         this.removeBooklet();
-        var $loading = $('#loading');
-        var $bttn_next = $('#next_page_button');
-        var $bttn_prev = $('#prev_page_button');
-        var $mybook = $('#mybook');
+        var $loading = $(this.refs.loading);
+        var $bttn_next = $(this.refs.next_page_button);
+        var $bttn_prev = $(this.refs.prev_page_button);
+        var $mybook = $(this.refs.mybook);
         $loading.show();
         $bttn_next.hide();
         $bttn_prev.hide();
@@ -99,10 +104,10 @@ var Book = React.createClass({
         }
         return (
             <div className="book_wrapper">
-                <a id="next_page_button"></a>
-                <a id="prev_page_button"></a>
-                <div id="loading" className="loading">Loading pages...</div>
-                <div id="mybook" style={{display: 'none'}}>
+                <a id="next_page_button" ref="next_page_button"></a>
+                <a id="prev_page_button" ref="prev_page_button"></a>
+                <div id="loading" ref="loading" className="loading">Loading pages...</div>
+                <div id="mybook" ref="mybook" style={{display: 'none'}}>
                     {temp}
                 </div>
             </div>
