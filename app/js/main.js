@@ -1,4 +1,9 @@
 $(function() {
+    // add check scrollbar function
+    $.fn.hasScrollBar = function() {
+        return this.get(0).scrollHeight > this.height();
+    };
+
     var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
             "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
     var $mybook = $('#mybook');
@@ -7,10 +12,29 @@ $(function() {
     var $loading = $('#loading');
     var $no_image = $('.no_image');
     var $gallery = $('.gallery');
-    var $test = $('.test');
+
+    var mouseEnter = false;
+    var pendding = false;
+    var movement = 0;
+
+    $gallery
+    .mouseenter(function(event) {
+        mouseEnter = true;
+    })
+    .mouseleave(function(event) {
+        mouseEnter = false;
+        if (pendding) {
+            // scroll gallery after hover animation finish
+            setTimeout(galleryScroll, 500);
+        }
+    });
+
 
     var useObjectUrl = false;
     var imagelist = [];
+
+    var GALLERY_WIDTH = 900;
+    var GALLERY_ITEM_WIDTH = 116;
 
     var length = 0;
     var loaded = 0;
@@ -92,7 +116,27 @@ $(function() {
 
             next: $bttn_next, // selector for element to use as click trigger for next page
             prev: $bttn_prev, // selector for element to use as click trigger for previous page
+            change: bookletChangeHandler
         });
+    }
+
+    function bookletChangeHandler(event, data) {
+        if (!$gallery.hasScrollBar()) {
+            return;
+        }
+        var index = data.index + 1;
+        movement = index * GALLERY_ITEM_WIDTH - (GALLERY_WIDTH / 2)
+        if (mouseEnter) {
+            pendding = true;
+        } else {
+            galleryScroll();
+        }
+    }
+
+    function galleryScroll() {
+        pendding = false;
+        $gallery.scrollLeft(movement);
+        movement = 0;
     }
 
     function removeBooklet() {

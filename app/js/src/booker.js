@@ -1,6 +1,53 @@
 var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
             "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
+
+$.fn.hasScrollBar = function() {
+    return this.get(0).scrollHeight > this.height();
+};
+
+var mouseEnter = false;
+var pendding = false;
+var movement = 0;
+
+var GALLERY_WIDTH = 900;
+var GALLERY_ITEM_WIDTH = 116;
+
+function galleryScroll() {
+    var $gallery = $('.gallery');
+    pendding = false;
+    $gallery.scrollLeft(movement);
+    movement = 0;
+}
+
+function bookletChangeHandler(event, data) {
+    var $gallery = $('.gallery');
+    if (!$gallery.hasScrollBar()) {
+        return;
+    }
+    var index = data.index + 1;
+    movement = index * GALLERY_ITEM_WIDTH - (GALLERY_WIDTH / 2)
+    if (mouseEnter) {
+        pendding = true;
+    } else {
+        galleryScroll();
+    }
+}
+
 var Gallery = React.createClass({
+    componentDidMount: function() {
+        var $gallery = $('.gallery');
+        $gallery
+        .mouseenter(function(event) {
+            mouseEnter = true;
+        })
+        .mouseleave(function(event) {
+            mouseEnter = false;
+            if (pendding) {
+                // scroll gallery after hover animation finish
+                setTimeout(galleryScroll, 500);
+            }
+        });
+    },
     render: function() {
         var temp;
         var images = this.props.images;
@@ -69,6 +116,7 @@ var Book = React.createClass({
             prev: $bttn_prev, // selector for element to use as click trigger for previous page
 
             shadows: false, // display shadows on page animations
+            change: bookletChangeHandler
         });
     },
     componentWillUnmount: function() {

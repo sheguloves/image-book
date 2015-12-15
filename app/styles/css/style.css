@@ -188,6 +188,9 @@ a#prev_page_button:hover {
     height: 20rem;
     width: 90rem;
     margin: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 4rem;
 }
 
 .gallery ul {
@@ -195,9 +198,6 @@ a#prev_page_button:hover {
     width: 100%;
     display: block;
     white-space: nowrap; /* use this attribute to make children keep in one line */
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-top: 4rem;
 }
 
 .gallery li{
