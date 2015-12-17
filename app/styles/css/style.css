@@ -42,6 +42,8 @@ input[type="file"] {
  nav bar
 */
 .btn-group > label {
+    text-decoration: underline;
+    font-size: 1.5rem;
     cursor: pointer;
     margin: 0;
     font-weight: normal;
@@ -55,6 +57,7 @@ input[type="file"] {
 
 .btn-group .separater {
     padding: 0 10px;
+    text-decoration: none;
 }
 
 /*
@@ -123,7 +126,7 @@ input[type="file"] {
     cursor: pointer;
     margin-top: -2rem;
     top: 50%;
-    font-size: 1.3em;
+    font-size: 2em;
 }
 
 .fa-chevron-right {
