@@ -52,7 +52,7 @@ input[type="file"] {
 }
 
 .btn-group > label:hover {
-    color: #555;
+    color: #000;
 }
 
 .btn-group .separater {
