@@ -13,6 +13,7 @@ var movement = 0;
 var key = 0;
 
 function getSize() {
+    //TODO: add more device support
     if (window.matchMedia("(min-width: 1200px)").matches) {
         return {
             width: 980,
@@ -91,7 +92,7 @@ var NarBar = React.createClass({
 
 var Gallery = React.createClass({
     componentDidMount: function() {
-        var $gallery = $('.gallery');
+        var $gallery = $(this.refs.gallery);
         $gallery
         .mouseenter(function(event) {
             mouseEnter = true;
@@ -102,6 +103,24 @@ var Gallery = React.createClass({
                 // scroll gallery after hover animation finish
                 setTimeout(galleryScroll, 500);
             }
+        });
+        $(this.refs.scrollnext)
+        .click(function(event) {
+            if (!$gallery.hasScrollBar()) {
+                return;
+            }
+            var size = getSize();
+            movement = $gallery.scrollLeft() + size.itemwidth;
+            galleryScroll();
+        });
+        $(this.refs.scrollprev)
+        .click(function(event) {
+            if (!$gallery.hasScrollBar()) {
+                return;
+            }
+            var size = getSize();
+            movement = $gallery.scrollLeft() - size.itemwidth;
+            galleryScroll();
         });
     },
     render: function() {
@@ -117,10 +136,14 @@ var Gallery = React.createClass({
             temp = <div> No image selected </div>
         }
         return (
-            <div className="gallery">
-                <ul>
-                    {temp}
-                </ul>
+            <div className="gallery_wrapper">
+                <i ref="scrollprev" className="fa fa-chevron-left"></i>
+                <i ref="scrollnext" className="fa fa-chevron-right"></i>
+                <div ref="gallery" className="gallery">
+                    <ul>
+                        {temp}
+                    </ul>
+                </div>
             </div>
         );
     }
@@ -209,15 +232,12 @@ var Book = React.createClass({
                 key++;
                 temp.push(<ImageItem key={key} imagesrc={item} />);
             });
-        } else {
-            temp = <div> No image selected </div>
         }
         return (
             <div className="book_wrapper">
                 <i className="fa fa-chevron-left" ref="prev_page_button"></i>
                 <i className="fa fa-chevron-right" ref="next_page_button"></i>
-                <div id="loading" ref="loading" className="loading">Loading pages...</div>
-                <div className="no_image">No Image selected!</div>
+                <div ref="loading" className="loading">Loading pages...</div>
                 <div id="mybook" ref="mybook" style={{display: 'none'}}>
                     {temp}
                 </div>

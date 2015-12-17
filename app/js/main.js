@@ -9,11 +9,29 @@ $(function() {
                 "app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
                 "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
     var $mybook = $('#mybook');
-    var $bttn_next = $('.fa-chevron-right');
-    var $bttn_prev = $('.fa-chevron-left');
-    var $loading = $('#loading');
-    var $no_image = $('.no_image');
+    var $bttn_next = $('#next');
+    var $bttn_prev = $('#prev');
+    var $loading = $('.loading');
     var $gallery = $('.gallery');
+
+    $('#scroll-next')
+    .click(function(event) {
+        if (!$gallery.hasScrollBar()) {
+            return;
+        }
+        var size = getSize();
+        movement = $gallery.scrollLeft() + size.itemwidth;
+        galleryScroll();
+    });
+    $('#scroll-prev')
+    .click(function(event) {
+        if (!$gallery.hasScrollBar()) {
+            return;
+        }
+        var size = getSize();
+        movement = $gallery.scrollLeft() - size.itemwidth;
+        galleryScroll();
+    });
 
     var mouseEnter = false;
     var pendding = false;
@@ -97,7 +115,6 @@ $(function() {
     function renderImages(imagelist) {
         if (imagelist.length > 0) {
             length = imagelist.length;
-            $no_image.hide();
             imagelist.forEach(function(item) {
                 var $img = $('<img>');
                 $img.one('load', loadHandler);
@@ -109,8 +126,6 @@ $(function() {
                     $(this).load();
                 }
             });
-        } else {
-            $no_image.show();
         }
     }
 
