@@ -15,7 +15,7 @@ var key = 0;
 var coverPage = <div style={{padding: '20px'}}>
                     <ul>
                         <li>LOGO的位置可以看页面左上角</li>
-                        <li>可以给每个页面加链接，比如： <a href="http://wwww.baidu.com" target="_blank">百度</a></li>
+                        <li>可以给每个页面加链接，比如： <a href="https://wwww.baidu.com" target="_blank">百度</a></li>
                         <li>每个页面实际上是一个网页，所以如果要制作出一本书，实际上每个页面都必须用作网页的方法做，当然
                             每个页面可以直接拷贝到一个地方，简单的加一些东西就可以生成一个独立的网页。现在我只是简单的在每个
                             页面上放置了图片，如果你的样本都是图片，可以直接导入图片，就可以作为一本书预览</li>
@@ -56,6 +56,13 @@ function getSize() {
 }
 
 var currentSize = getSize();
+
+function addBrowserBehavior() {
+    $('a[target=_blank]').on('click', function(){
+       require('nw.gui').Shell.openExternal(this.href);
+       return false;
+    });
+}
 
 function galleryScroll() {
     var $gallery = $('.gallery');
@@ -261,6 +268,7 @@ var Book = React.createClass({
                 $mybook.booklet('option', currentSize);
             }
         });
+        addBrowserBehavior();
     },
     render: function() {
         var temp;
