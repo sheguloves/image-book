@@ -235,8 +235,8 @@ var Book = React.createClass({
         }
         return (
             <div className="book_wrapper">
-                <i className="fa fa-chevron-left" ref="prev_page_button"></i>
-                <i className="fa fa-chevron-right" ref="next_page_button"></i>
+                <i className="fa fa-chevron-left" ref="next_page_button"></i>
+                <i className="fa fa-chevron-right" ref="prev_page_button"></i>
                 <div ref="loading" className="loading">Loading pages...</div>
                 <div id="mybook" ref="mybook" style={{display: 'none'}}>
                     {temp}

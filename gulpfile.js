@@ -13,8 +13,16 @@ var bases = {
 
 var paths = {
     booklet: ['app/libs/booklet/*.js'],
-    libs: ['bower_components/react/react.js',
+    libs: [
+        'bower_components/react/react.js',
         'bower_components/react/react-dom.js'
+    ],
+    libcss: [
+        'bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'bower_components/font-awesome/css/font-awesome.min.css'
+    ],
+    libfonts: [
+        'bower_components/font-awesome/fonts/**'
     ],
     bookletimages: ['app/libs/booklet/images/**'],
     basefiles: ['package.json'],
@@ -61,26 +69,39 @@ gulp.task('copy-rawjs', ['clean'], function() {
         .pipe(gulp.dest(bases.app + "js"));
 });
 
-// concat and minify css files
 gulp.task('copy-styles', ['clean'], function() {
     return gulp.src(paths.styles)
         .pipe(gulp.dest(bases.app + 'styles'));
 });
 
+gulp.task('copy-libs-css', ['clean'], function() {
+    return gulp.src(paths.libcss)
+        .pipe(gulp.dest(bases.app + 'styles/css'));
+});
+
+gulp.task('copy-libs-fonts', ['clean'], function() {
+    return gulp.src(paths.libfonts)
+        .pipe(gulp.dest(bases.app + 'styles/fonts'));
+});
+
 // replace css/libs/js with min files
-gulp.task('build-reactjs', ['clean', 'copy-booklet', 'copy-libs', 'copy-reactjs',
-    'copy-styles', 'copy-files', 'copy-images'],  function() {
+gulp.task('build-reactjs', ['clean', 'copy-booklet', 'copy-libs', 'copy-reactjs', 'copy-styles',
+    'copy-files', 'copy-images', 'copy-libs-css', 'copy-libs-fonts'],  function() {
     return gulp.src(paths.indexhtml)
         .pipe(htmlreplace({
             'libs': ['app/libs/react/react.js', 'app/libs/react/react-dom.js'],
+            'css': ['app/styles/css/bootstrap.min.css', 'app/styles/css/font-awesome.min.css'],
             'js': 'app/js/booker.js'
         }))
         .pipe(gulp.dest(bases.dist));
 });
 
-gulp.task('build-rawjs', ['clean', 'copy-booklet', 'copy-rawjs',
-    'copy-styles', 'copy-files', 'copy-images'],  function() {
-    return gulp.src(paths.indexhtml)
+gulp.task('build-rawjs', ['clean', 'copy-booklet', 'copy-rawjs', 'copy-styles', 'copy-files',
+    'copy-images', 'copy-libs-css', 'copy-libs-fonts'],  function() {
+    return gulp.src(paths.testhtml)
+        .pipe(htmlreplace({
+            'css': ['app/styles/css/bootstrap.min.css', 'app/styles/css/font-awesome.min.css']
+        }))
         .pipe(gulp.dest(bases.dist));
 });
 
