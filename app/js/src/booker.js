@@ -12,6 +12,21 @@ var pendding = false;
 var movement = 0;
 var key = 0;
 
+var coverPage = <div style={{padding: '20px'}}>
+                    <ul>
+                        <li>LOGO的位置可以看页面左上角</li>
+                        <li>可以给每个页面加链接，比如： <a href="http://wwww.baidu.com" target="_blank">百度</a></li>
+                        <li>每个页面实际上是一个网页，所以如果要制作出一本书，实际上每个页面都必须用作网页的方法做，当然
+                            每个页面可以直接拷贝到一个地方，简单的加一些东西就可以生成一个独立的网页。现在我只是简单的在每个
+                            页面上放置了图片，如果你的样本都是图片，可以直接导入图片，就可以作为一本书预览</li>
+                        <li>关于一共多少页当然可以加，不过我已经加上可预览，也可以通过下面的预览滚动条操作，知道一共有多少页
+                            如果要做成你发的那个样子，可以做到，需要时间</li>
+                        <li>关于时间限制，可以加，有个很简单的方式，但是破解起来应该也很简单，复杂的方法也是可以做的</li>
+                        <li>关于分类按钮，跟链接是一样的，都是很容易就可以加的</li>
+                        <li>关于夸平台，当前的这个东西只仅限于桌面应用，windows、mac、linux，移动设备暂时还不支持，以后能不能支持，不知道</li>
+                    </ul>
+                </div>;
+
 function getSize() {
     if (window.matchMedia("(min-width: 1200px) and (min-height: 1100px)").matches) {
         return {
@@ -67,7 +82,9 @@ function bookletChangeHandler(event, data) {
 var InfoArea = React.createClass({
     render: function() {
         return (
-            <div className="header"></div>
+            <div className="header">
+                <label style={{lineHeight: "5rem", backgroundColor: "#fff"}}>LOGO位置</label>
+            </div>
         );
     }
 });
@@ -93,9 +110,9 @@ var NarBar = React.createClass({
                 <div className="container">
                     <div className="btn-group">
                         <input id="fileSelectionIpt" type="file" multiple onChange={this.handleFiles} accept="image/*"/>
-                        <label htmlFor="fileSelectionIpt">Import Images</label>
+                        <label htmlFor="fileSelectionIpt" title="导入图片">导入</label>
                         <label className="separater"> | </label>
-                        <label>About</label>
+                        <label>关于</label>
                     </div>
                 </div>
             </nav>
@@ -172,13 +189,13 @@ var GalleryItem = React.createClass({
         $mybook.booklet("gotopage", this.props.pageindex);
     },
     render: function() {
-        var clazz = (this.props.pageindex % 2) === 0 ? "left-page" : "right-page";
-        clazz = clazz + " galleryItem";
         return (
-            <li><div className={clazz} onClick={this.clickHandler}>
-                <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
-                <div className="g-counter">{this.props.pageindex + 1}</div>
-            </div></li>
+            <li>
+                <div className="galleryItem" onClick={this.clickHandler}>
+                    <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
+                    <div className="g-counter">{this.props.pageindex + 1}</div>
+                </div>
+            </li>
         );
     }
 });
@@ -250,6 +267,7 @@ var Book = React.createClass({
         var images = this.props.images;
         if (images && images.length > 0) {
             temp = [];
+            temp.push(coverPage);
             images.forEach(function(item) {
                 key++;
                 temp.push(<ImageItem key={key} imagesrc={item} />);
@@ -296,7 +314,7 @@ var Footer = React.createClass({
     render: function() {
         return (
             <footer>
-                <p>© 2015 Build by Felix Xi</p>
+                <p>Copyright © 2015 All rights reserved. Build by Felix Xi</p>
             </footer>
         );
     }
