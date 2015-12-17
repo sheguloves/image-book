@@ -7,9 +7,15 @@
 -->
 <head>
     <title>Image book with jQuery Booklet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Image book with jQuery Booklet"/>
     <meta name="keywords" content="jquery, image book, flip, pages, booklet, plugin, css3"/>
 
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css" />
+    <!-- endbuild -->
 
     <link rel="stylesheet" type="text/css" href="app/styles/css/jquery.booklet.latest.css"/>
     <link rel="stylesheet" type="text/css" href="app/styles/css/style.css"/>
@@ -20,23 +26,33 @@
 </head>
 
 <body>
-    <header>
-        <h1>Image book with jQuery Booklet</h1>
-    </header>
-    <div class="book_wrapper">
-        <a id="next_page_button"></a>
-        <a id="prev_page_button"></a>
-        <div id="loading" class="loading">Loading pages...</div>
-        <div class="no_image">No Image selected!</div>
-        <div id="mybook" style="display:none;">
+    <div class="header"></div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="btn-group">
+                <input id="fileDialog" type="file" multiple accept="image/*"/>
+                <label for="fileDialog">Import Images</label>
+                <label class="separater"> | </label>
+                <label>About</label>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="book_wrapper">
+            <i class="fa fa-chevron-left"></i>
+            <i class="fa fa-chevron-right"></i>
+            <div id="loading" class="loading">Loading pages...</div>
+            <div class="no_image">No Image selected!</div>
+            <div id="mybook" style="display:none;">
+            </div>
+        </div>
+        <div class="gallery">
         </div>
     </div>
-    <footer id="footer">
-        <input id="fileDialog" type="file" multiple accept="image/*" style="display:none;"/>
-        <label for="fileDialog" class="open-button">Select Images</label>
+
+    <footer>
+        <p>© 2015 Build by Felix Xi</p>
     </footer>
-    <div class="gallery">
-    </div>
     <!-- The JavaScript -->
     <script type="text/javascript" src="app/js/main.js"></script>
 </body>

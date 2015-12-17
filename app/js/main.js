@@ -5,10 +5,12 @@ $(function() {
     };
 
     var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
-            "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
+                "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg",
+                "app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
+                "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
     var $mybook = $('#mybook');
-    var $bttn_next = $('#next_page_button');
-    var $bttn_prev = $('#prev_page_button');
+    var $bttn_next = $('.fa-chevron-right');
+    var $bttn_prev = $('.fa-chevron-left');
     var $loading = $('#loading');
     var $no_image = $('.no_image');
     var $gallery = $('.gallery');
@@ -33,9 +35,6 @@ $(function() {
     var useObjectUrl = false;
     var imagelist = [];
 
-    var GALLERY_WIDTH = 900;
-    var GALLERY_ITEM_WIDTH = 116;
-
     var length = 0;
     var loaded = 0;
 
@@ -47,7 +46,23 @@ $(function() {
             buildGallery(temp);
             loaded = 0;
         }
-    };
+    }
+
+    function getSize() {
+        if (window.matchMedia("(min-width: 1200px)").matches) {
+            return {
+                width: 980,
+                height: 700,
+                itemwidth: 105
+            };
+        } else {
+            return {
+                width: 980,
+                height: 700,
+                itemwidth: 105
+            }
+        }
+    }
 
     function buildGallery(pages) {
         var page;
@@ -103,10 +118,11 @@ $(function() {
         $loading.hide();
         $bttn_next.show();
         $bttn_prev.show();
+        var size = getSize();
         $mybook.show().booklet({
             name: null, // name of the booklet to display in the document title bar
-            width: 800, // container width
-            height: 500, // container height
+            width: size.width, // container width
+            height: size.height, // container height
             speed: 300, // speed of the transition between pages
             direction: 'LTR', // direction of the overall content organization, default LTR, left to right, can be RTL for languages which read right to left
             startingPage: 0, // index of the first page to be displayed
@@ -114,7 +130,7 @@ $(function() {
             easeIn: 'easeInQuad', // easing method for first half of transition
             easeOut: 'easeOutQuad', // easing method for second half of transition
 
-            pagePadding: 10, // padding for each page wrapper
+            pagePadding: 0, // padding for each page wrapper
             pageNumbers: true, // display page numbers on each page
 
             next: $bttn_next, // selector for element to use as click trigger for next page
@@ -127,8 +143,9 @@ $(function() {
         if (!$gallery.hasScrollBar()) {
             return;
         }
+        var size = getSize();
         var index = data.index + 1;
-        movement = index * GALLERY_ITEM_WIDTH - (GALLERY_WIDTH / 2)
+        movement = index * size.itemwidth - (size.width / 2)
         if (mouseEnter) {
             pendding = true;
         } else {

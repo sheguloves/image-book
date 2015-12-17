@@ -1,4 +1,6 @@
 var urls = ["app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
+            "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg",
+            "app/styles/images/001.jpg", "app/styles/images/002.jpg", "app/styles/images/003.jpg", "app/styles/images/004.jpg",
             "app/styles/images/005.jpg", "app/styles/images/006.jpg", "app/styles/images/007.jpg", "app/styles/images/008.jpg"];
 
 $.fn.hasScrollBar = function() {
@@ -8,9 +10,23 @@ $.fn.hasScrollBar = function() {
 var mouseEnter = false;
 var pendding = false;
 var movement = 0;
+var key = 0;
 
-var GALLERY_WIDTH = 900;
-var GALLERY_ITEM_WIDTH = 116;
+function getSize() {
+    if (window.matchMedia("(min-width: 1200px)").matches) {
+        return {
+            width: 980,
+            height: 700,
+            itemwidth: 105
+        };
+    } else {
+        return {
+            width: 980,
+            height: 700,
+            itemwidth: 105
+        }
+    }
+}
 
 function galleryScroll() {
     var $gallery = $('.gallery');
@@ -24,14 +40,54 @@ function bookletChangeHandler(event, data) {
     if (!$gallery.hasScrollBar()) {
         return;
     }
+    var size = getSize();
     var index = data.index + 1;
-    movement = index * GALLERY_ITEM_WIDTH - (GALLERY_WIDTH / 2)
+    movement = index * size.itemwidth - (size.width / 2)
     if (mouseEnter) {
         pendding = true;
     } else {
         galleryScroll();
     }
 }
+
+var InfoArea = React.createClass({
+    render: function() {
+        return (
+            <div className="header"></div>
+        );
+    }
+});
+
+var NarBar = React.createClass({
+    handleFiles: function(event) {
+        var files = event.target.files;
+        if (files.length === 0) {
+            return null;
+        } else {
+            var imagelist = [];
+            var src;
+            for (var i = 0; i < files.length; i++) {
+                src = window.URL.createObjectURL(files[i]);
+                imagelist.push(src);
+            }
+            this.props.onImageSelected(imagelist);
+        }
+    },
+    render: function() {
+        return (
+            <nav className="navbar navbar-default">
+                <div className="container">
+                    <div className="btn-group">
+                        <input id="fileSelectionIpt" type="file" multiple onChange={this.handleFiles} accept="image/*"/>
+                        <label htmlFor="fileSelectionIpt">Import Images</label>
+                        <label className="separater"> | </label>
+                        <label>About</label>
+                    </div>
+                </div>
+            </nav>
+        );
+    }
+});
 
 var Gallery = React.createClass({
     componentDidMount: function() {
@@ -54,7 +110,8 @@ var Gallery = React.createClass({
         if (images && images.length > 0) {
             temp = [];
             for (var i = 0; i < images.length; i ++) {
-                temp.push(<GalleryItem key={images[i] + i} pageindex={i} imagesrc={images[i]} />);
+                key++;
+                temp.push(<GalleryItem key={key} pageindex={i} imagesrc={images[i]} />);
             }
         } else {
             temp = <div> No image selected </div>
@@ -65,7 +122,7 @@ var Gallery = React.createClass({
                     {temp}
                 </ul>
             </div>
-        )
+        );
     }
 });
 
@@ -86,7 +143,7 @@ var GalleryItem = React.createClass({
                 <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
                 <div className="g-counter">{this.props.pageindex + 1}</div>
             </div></li>
-        )
+        );
     }
 });
 
@@ -103,15 +160,16 @@ var Book = React.createClass({
         $loading.hide();
         $bttn_next.show();
         $bttn_prev.show();
+        var size = getSize();
         $mybook.show().booklet({
-            width: 800, // container width
-            height: 500, // container height
+            width: size.width, // container width
+            height: size.height, // container height
             speed: 300, // speed of the transition between pages
             startingPage: 0, // index of the first page to be displayed
 
             closed: false,   // start with the book "closed", will add empty pages to beginning and end of book
 
-            pagePadding: 10, // padding for each page wrapper
+            pagePadding: 0, // padding for each page wrapper
             pageNumbers: true, // display page numbers on each page
 
             keyboard: true, // enables navigation with arrow keys (left: previous, right: next)
@@ -148,24 +206,25 @@ var Book = React.createClass({
         if (images && images.length > 0) {
             temp = [];
             images.forEach(function(item) {
-                temp.push(<ImageItem key={item} imagesrc={item} />);
+                key++;
+                temp.push(<ImageItem key={key} imagesrc={item} />);
             });
         } else {
             temp = <div> No image selected </div>
         }
         return (
             <div className="book_wrapper">
-                <a id="next_page_button" ref="next_page_button"></a>
-                <a id="prev_page_button" ref="prev_page_button"></a>
+                <i className="fa fa-chevron-left" ref="prev_page_button"></i>
+                <i className="fa fa-chevron-right" ref="next_page_button"></i>
                 <div id="loading" ref="loading" className="loading">Loading pages...</div>
+                <div className="no_image">No Image selected!</div>
                 <div id="mybook" ref="mybook" style={{display: 'none'}}>
                     {temp}
                 </div>
             </div>
-        )
+        );
     }
 });
-
 
 var ImageItem = React.createClass({
     loadHandler: function() {
@@ -176,36 +235,32 @@ var ImageItem = React.createClass({
             <div className="image_box">
                 <img src={this.props.imagesrc} onLoad={this.loadHandler}/>
             </div>
-        )
-    }
-});
-
-var Files = React.createClass({
-    handleFiles: function(event) {
-        var files = event.target.files;
-        if (files.length === 0) {
-            return null;
-        } else {
-            var imagelist = [];
-            var src;
-            for (var i = 0; i < files.length; i++) {
-                src = window.URL.createObjectURL(files[i]);
-                imagelist.push(src);
-            }
-            this.props.onImageSelected(imagelist);
-        }
-    },
-    render: function() {
-        return (
-            <footer>
-                <input id="fileDialog" type="file" multiple onChange={this.handleFiles} accept="image/*" style={{display:'none'}}/>
-                <label style={{cursor: 'pointer'}} htmlFor="fileDialog" className="open-button">Select Images</label>
-            </footer>
-        )
+        );
     }
 });
 
 var Booker = React.createClass({
+    render: function() {
+        return (
+            <div className="container">
+                <Book images={this.props.images} />
+                <Gallery images={this.props.images} />
+            </div>
+        );
+    }
+});
+
+var Footer = React.createClass({
+    render: function() {
+        return (
+            <footer>
+                <p>© 2015 Build by Felix Xi</p>
+            </footer>
+        );
+    }
+});
+
+var App = React.createClass({
     getInitialState: function() {
         return {
             images: urls
@@ -216,16 +271,17 @@ var Booker = React.createClass({
     },
     render: function() {
         return (
-            <div>
-                <Book images={this.state.images} />
-                <Files onImageSelected={this.handleImageSelected} />
-                <Gallery images={this.state.images} />
+            <div style={{width: '100%', height: '100%'}}>
+                <InfoArea />
+                <NarBar onImageSelected={this.handleImageSelected} />
+                <Booker images={this.state.images}/>
+                <Footer />
             </div>
         );
     }
-});
+})
 
 ReactDOM.render(
-    <Booker />,
-    document.getElementById('booker')
+    <App />,
+    document.getElementById('root')
 );
