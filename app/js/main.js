@@ -14,6 +14,15 @@ $(function() {
     var $loading = $('.loading');
     var $gallery = $('.gallery');
 
+    $(window).resize(function() {
+        var temp = getSize();
+        if (temp.width !== currentSize.width) {
+            currentSize = temp;
+            delete currentSize.itemwidth;
+            $mybook.booklet('option', currentSize);
+        }
+    });
+
     $('#scroll-next')
     .click(function(event) {
         if (!$gallery.hasScrollBar()) {
@@ -67,20 +76,34 @@ $(function() {
     }
 
     function getSize() {
-        if (window.matchMedia("(min-width: 1200px)").matches) {
+        if (window.matchMedia("(min-width: 1200px) and (min-height: 1100px)").matches) {
             return {
                 width: 980,
                 height: 700,
                 itemwidth: 105
             };
+        } else if (window.matchMedia("(min-width: 992px) and (min-height: 990px)").matches) {
+            return {
+                width: 840,
+                height: 600,
+                itemwidth: 84
+            }
+        } else if (window.matchMedia("(min-width: 768px) and (min-height: 800px)").matches) {
+            return {
+                width: 630,
+                height: 450,
+                itemwidth: 70
+            }
         } else {
             return {
-                width: 980,
-                height: 700,
-                itemwidth: 105
+                width: 630,
+                height: 450,
+                itemwidth: 70
             }
         }
     }
+
+    var currentSize = getSize();
 
     function buildGallery(pages) {
         var page;

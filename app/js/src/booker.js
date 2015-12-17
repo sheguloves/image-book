@@ -13,21 +13,34 @@ var movement = 0;
 var key = 0;
 
 function getSize() {
-    //TODO: add more device support
-    if (window.matchMedia("(min-width: 1200px)").matches) {
+    if (window.matchMedia("(min-width: 1200px) and (min-height: 1100px)").matches) {
         return {
             width: 980,
             height: 700,
             itemwidth: 105
         };
+    } else if (window.matchMedia("(min-width: 992px) and (min-height: 990px)").matches) {
+        return {
+            width: 840,
+            height: 600,
+            itemwidth: 84
+        }
+    } else if (window.matchMedia("(min-width: 768px) and (min-height: 800px)").matches) {
+        return {
+            width: 630,
+            height: 450,
+            itemwidth: 70
+        }
     } else {
         return {
-            width: 980,
-            height: 700,
-            itemwidth: 105
+            width: 630,
+            height: 450,
+            itemwidth: 70
         }
     }
 }
+
+var currentSize = getSize();
 
 function galleryScroll() {
     var $gallery = $('.gallery');
@@ -222,6 +235,15 @@ var Book = React.createClass({
     componentDidMount: function() {
         // add booklet immediately after initial images loading
         this.addBooklet();
+        var $mybook = $(this.refs.mybook);
+        $(window).resize(function() {
+            var temp = getSize();
+            if (temp.width !== currentSize.width) {
+                currentSize = temp;
+                delete currentSize.itemwidth;
+                $mybook.booklet('option', currentSize);
+            }
+        });
     },
     render: function() {
         var temp;
