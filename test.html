@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 <!--
     refer to: [http://builtbywill.com/code/booklet/,
     http://tympanus.net/codrops/2010/12/14/moleskine-notebook/]
@@ -31,9 +31,9 @@
         <div class="container">
             <div class="btn-group">
                 <input id="fileDialog" type="file" multiple accept="image/*"/>
-                <label for="fileDialog">Import Images</label>
+                <label for="fileDialog" title="导入图片">导入</label>
                 <label class="separater"> | </label>
-                <label>About</label>
+                <label>关于</label>
             </div>
         </div>
     </nav>
@@ -41,7 +41,7 @@
         <div class="book_wrapper">
             <i id="next" class="fa fa-chevron-left"></i>
             <i id="prev" class="fa fa-chevron-right"></i>
-            <div class="loading"><i class="fa fa-spinner fa-pulse"></i>Loading Pages ...</div>
+            <div class="loading"><i class="fa fa-spinner fa-pulse"></i>加载页面中...</div>
             <div id="mybook" style="display:none;">
             </div>
         </div>
